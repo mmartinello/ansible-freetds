@@ -1,0 +1,5 @@
+---
+- name: Configure FreeTDS
+  template:
+    src: templates/freetds.conf.j2
+    dest: /etc/freetds/freetds.conf

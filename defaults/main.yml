@@ -1,2 +1,36 @@
 ---
-# defaults file for mmartinello.freetds
+# TDS protocol version
+freetds_version: auto
+
+# If you get out-of-memory errors, it may mean that your client
+# is trying to allocate a huge buffer for a TEXT field.  
+# Try setting 'text size' to a more reasonable limit 
+freetds_text_size: 64512
+
+# Whether to write a TDSDUMP file for diagnostic purposes
+# (setting this to /tmp is insecure on a multi-user system)
+# freetds_dump_file: /tmp/freetds.log
+# freetds_debug_flags: 0xffff
+
+# Command and connection timeouts
+# freetds_timeout: 10
+# freetds_connect_timeout: 10
+
+# If you experience TLS handshake errors and are using openssl,
+# try adjusting the cipher list (don't surround in double or single quotes)
+# freetds_openssl_ciphers: HIGH:!SSLv2:!aNULL:-DH
+
+# Server list
+freetds_servers:
+  - egServer50:
+      comment: A typical Sybase server
+      host: symachine.domain.com
+      port: 5000
+      tds_version: 5.0
+      # instance: foo
+  - egServer70:
+      comment: A typical Microsoft server
+      host: ntmachine.domain.com
+      port: 1433
+      tds_version: 7.0
+      # instance: foo

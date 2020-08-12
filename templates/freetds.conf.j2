@@ -1,0 +1,51 @@
+# {{ ansible_managed }}
+
+# FreeTDS Configuration file 
+
+# Global settings are overridden by those in a database
+# server specific section
+
+[global]
+    
+	tds version = {{ freetds_version }}
+{% if freetds_dump_file is defined %}
+
+	dump file = {{ freetds_dump_file }}
+{% endif %}
+{% if freetds_debug_flags is defined %}
+
+	debug flags = {{ freetds_debug_flags }}
+{% endif %}
+{% if freetds_timeout is defined %}
+
+	timeout = {{ freetds_timeout }}
+{% endif %}
+{% if freetds_connect_timeout is defined %}
+
+	connect timeout = {{ freetds_connect_timeout }}
+{% endif %}
+	
+	text size = {{ freetds_text_size }}
+{% if freetds_openssl_ciphers is defined %}
+
+	openssl ciphers = {{ freetds_openssl_ciphers }}
+{% endif %}
+
+
+# Server list
+
+{% for server in freetds_servers %}
+{% for server_name, server_config in server.items() %}
+{% if server_config.comment is defined %}
+# {{ server_config.comment }}
+{% endif %}
+[{{ server_name }}]
+	host = {{ server_config.host }}
+	port = {{ server_config.port }}
+	tds version = {{ server_config.tds_version }}
+{% if server_config.instance is defined %}
+    instance = {{ server_config.instance }}
+{% endif %}
+{% endfor %}
+
+{% endfor %}
