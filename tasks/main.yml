@@ -1,2 +1,4 @@
 ---
-# tasks file for mmartinello.freetds
+# Install
+- import_tasks: install.yml
+  tags: ['install']
